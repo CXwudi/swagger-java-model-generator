@@ -10,3 +10,7 @@ A stupid small project that can generate Java classes representing VocaDB Model
 4. run Main with arugument "models.txt"
 5. you should able to see the generated class in output/
 6. feel free to modify the source code to suit your needs
+
+## Appreciation
+
+Thanks for [VocaDB](https://vocadb.net/) for providing such great [API](https://github.com/vocadb/vocadb/wiki/Public-API) for fetching information about Vocaloid Songs
