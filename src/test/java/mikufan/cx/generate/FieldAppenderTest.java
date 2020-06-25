@@ -36,11 +36,11 @@ class FieldAppenderTest {
         "latitude (number, optional),\n" +
         "webLinks (Array[WebLinkContract], optional),\n" +
         "longitude (number, optional)";
-    var builder = ClassInfo.builder();
+    var builder = ClassInfo.builder().clazz("Dummy");
     for (String str : fieldAll.split("\n")) {
-      FieldAppender.putField(str, builder);
+      FieldAppender.putField(str, builder, Action.NEW_GENERIC_CLASS);
     }
-    log.info("sb = \n{}", builder.toString());
+    log.info("sb = \n{}", builder.build().toClassDefinition());
 
   }
 }

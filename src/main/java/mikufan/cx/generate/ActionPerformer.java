@@ -2,12 +2,16 @@ package mikufan.cx.generate;
 import mikufan.cx.generate.appender.FieldAppender;
 import mikufan.cx.generate.store_info.ClassInfo;
 
+import static mikufan.cx.generate.Action.NEW_CLASS;
+import static mikufan.cx.generate.Action.NEW_GENERIC_CLASS;
+
 /**
  * stateful careful
  */
 public class ActionPerformer {
 
   private static ClassInfo.ClassInfoBuilder classBuilder;
+  private static Action whatClazz;
 
   /**
    * performance one of the action to the line
@@ -22,17 +26,19 @@ public class ActionPerformer {
     switch (action){
       case NEW_GENERIC_CLASS:
         classBuilder = ClassInfo.builder();
+        whatClazz = NEW_GENERIC_CLASS;
         return putGenericTypeClassHeader(line, classBuilder);
 
       case NEW_CLASS:
         classBuilder = ClassInfo.builder();
+        whatClazz = NEW_CLASS;
         return putConcreteClassHeader(line, classBuilder);
 
       case END_CLASS:
         return endRecordAndStartWritingThisClass(line, classBuilder);
 
       case FIELD:
-        FieldAppender.putField(line, classBuilder);
+        FieldAppender.putField(line, classBuilder, whatClazz);
         return "";
       default:
         return "";

@@ -10,6 +10,8 @@ import java.util.List;
 public class FieldInfo {
   private String type;
   private String name;
+  private String modifier;
   @Singular
   private List<String> annotations;
+
 }

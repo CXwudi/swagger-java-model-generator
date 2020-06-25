@@ -66,7 +66,7 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
       var field = fields.get(i);
       var annotations = Lists.immutable.withAll(field.getAnnotations());
       fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
-      fieldSb.append("  ").append("private ").append(field.getType()).append(" ").append(field.getName())
+      fieldSb.append("  ").append(field.getModifier()).append(" ").append(field.getType()).append(" ").append(field.getName())
           .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
     }
 

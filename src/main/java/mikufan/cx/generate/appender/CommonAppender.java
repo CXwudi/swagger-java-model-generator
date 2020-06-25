@@ -12,13 +12,13 @@ public class CommonAppender {
   }
   public static void addEclispeCollAndLombokImport(StringBuilder classStringBuilder) {
     classStringBuilder.append("" +
-        "import com.fasterxml.jackson.annotation.JsonProperty;\n" +
+        "import com.fasterxml.jackson.annotation.*;\n" +
         "import lombok.*;\n" +
         "import org.eclipse.collections.api.list.MutableList;\n");
   }
 
   public static void addBasicLombokAnnotationOnClass(StringBuilder classStringBuilder) {
-    classStringBuilder.append("@Getter @ToString\n");
+    classStringBuilder.append("@Getter(onMethod_ = {@JsonIgnore}) @ToString\n");
   }
 
   public static void addLombokConstructorAnnotationOnClass(StringBuilder classStringBuilder) {

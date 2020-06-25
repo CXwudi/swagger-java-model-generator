@@ -37,7 +37,6 @@ public class GenericClassGenerator extends AbstractClassGenerator{
     CommonAppender.addComments(beforeClassSb);
     CommonAppender.addPackage(beforeClassSb, "dummy_package");
     beforeClassSb.append(Strings.LINE_SEPARATOR);
-    beforeClassSb.append("import com.fasterxml.jackson.annotation.JsonCreator;\n");
     CommonAppender.addEclispeCollAndLombokImport(beforeClassSb);
     beforeClassSb.append(Strings.LINE_SEPARATOR);
 
@@ -69,7 +68,7 @@ public class GenericClassGenerator extends AbstractClassGenerator{
     for (int i = 0; i < fields.size(); i++) {
       var field = fields.get(i);
       var fixedType = getFixedType(genericClass, field.getType());
-      fieldSb.append("  ").append("protected ").append(fixedType).append(" ").append(field.getName())
+      fieldSb.append("  ").append(field.getModifier()).append(" ").append(fixedType).append(" ").append(field.getName())
           .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
     }
 

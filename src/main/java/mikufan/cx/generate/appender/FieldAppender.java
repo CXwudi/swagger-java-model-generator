@@ -1,6 +1,7 @@
 package mikufan.cx.generate.appender;
 
 import lombok.SneakyThrows;
+import mikufan.cx.generate.Action;
 import mikufan.cx.generate.store_info.ClassInfo;
 import mikufan.cx.generate.store_info.FieldInfo;
 
@@ -12,7 +13,7 @@ public class FieldAppender {
       Pattern.compile("(?<className>\\w+)\\s+\\((?<type>[\\w\\[\\]]+),\\s+(?<optional>\\w+)\\)");
 
   @SneakyThrows
-  public static String putField(String line, ClassInfo.ClassInfoBuilder builder) {
+  public static String putField(String line, ClassInfo.ClassInfoBuilder builder, Action whatClazz) {
     //use regax match
     var matcher = FIELD_MATCHER.matcher(line);
     var fieldName = "";
@@ -29,6 +30,7 @@ public class FieldAppender {
         .type(getJavaType(typeName))
         .name(fieldName)
         .annotation("@JsonProperty")
+        .modifier(whatClazz == Action.NEW_GENERIC_CLASS ? "protected" : "private")
         .build());
 
     return builder.toString();
