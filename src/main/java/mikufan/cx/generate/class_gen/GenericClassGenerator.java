@@ -68,6 +68,8 @@ public class GenericClassGenerator extends AbstractClassGenerator{
     for (int i = 0; i < fields.size(); i++) {
       var field = fields.get(i);
       var fixedType = getFixedType(genericClass, field.getType());
+      var annotations = Lists.immutable.withAll(field.getAnnotations());
+      fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
       fieldSb.append("  ").append(field.getModifier()).append(" ").append(fixedType).append(" ").append(field.getName())
           .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
     }
