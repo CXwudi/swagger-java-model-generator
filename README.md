@@ -1,7 +1,8 @@
 # VocaDb-Java-Model-Generator
 
 A stupid small project that can generate Java classes representing VocaDB Models described in [VocaDB APIs](https://vocadb.net/swagger/ui/index#/)  
-Example models: [models.txt](models.txt)
+Example models: [models.txt](models.txt)  
+Example outputs: [output/](output/)
 
 ## How to use
 
