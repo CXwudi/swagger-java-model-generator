@@ -2,6 +2,7 @@ package mikufan.cx.generate.class_gen;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mikufan.cx.generate.appender.CommonAppender;
 import mikufan.cx.generate.store_info.FieldInfo;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public abstract class AbstractClassGenerator {
    * store constructor declaration
    */
   protected StringBuilder constructorSb = new StringBuilder();
+  /**
+   * util class for generating code before class declaration
+   */
+  protected CommonAppender commonAppender = new CommonAppender();
+
 
   public abstract String generateClass(
       List<FieldInfo> fields,

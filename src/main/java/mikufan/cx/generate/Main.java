@@ -18,13 +18,14 @@ public class Main {
     var eachLine = modelString.split("\n");
 
     String currentClassName = "";
+    ActionPerformer actionPerformer = new ActionPerformer();
     for (var line : eachLine){
       if(line.isEmpty() || line.equals(Strings.LINE_SEPARATOR)){
         continue;
       }
       var indication = ActionDecider.whatNext(line);
       log.info("indication = {}, line = {}", indication, line);
-      var returnString = ActionPerformer.performAction(indication, line);
+      var returnString = actionPerformer.performAction(indication, line);
       if (indication == NEW_CLASS || indication == NEW_GENERIC_CLASS){
         currentClassName = returnString;
       }
@@ -36,6 +37,7 @@ public class Main {
         }
         outputFile.toFile().createNewFile();
         Files.writeString(outputFile, returnString);
+        actionPerformer = new ActionPerformer();
       }
     }
   }

@@ -1,4 +1,4 @@
-package mikufan.cx.generate.appender;
+package mikufan.cx.generate;
 
 import lombok.SneakyThrows;
 import mikufan.cx.generate.Action;
@@ -7,13 +7,13 @@ import mikufan.cx.generate.store_info.FieldInfo;
 
 import java.util.regex.Pattern;
 
-public class FieldAppender {
+public class FieldReader {
 
   public static final Pattern FIELD_MATCHER =
       Pattern.compile("(?<className>\\w+)\\s+\\((?<type>[\\w\\[\\]]+),\\s+(?<optional>\\w+)\\)");
 
   @SneakyThrows
-  public static String putField(String line, ClassInfo.ClassInfoBuilder builder, Action whatClazz) {
+  public String readFieldAndStore(String line, ClassInfo.ClassInfoBuilder builder, Action whatClazz) {
     //use regax match
     var matcher = FIELD_MATCHER.matcher(line);
     var fieldName = "";
@@ -36,7 +36,7 @@ public class FieldAppender {
     return builder.toString();
   }
 
-  private static String getJavaType(String typeName){
+  private String getJavaType(String typeName){
     String realType = "";
     if (typeName.equalsIgnoreCase("string")){
       realType = "String";

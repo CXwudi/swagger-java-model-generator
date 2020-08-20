@@ -32,10 +32,10 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
    *
    */
   protected String generateBeforeClass(StringBuilder beforeClassSb) {
-    CommonAppender.addComments(beforeClassSb);
-    CommonAppender.addPackage(beforeClassSb, "dummy_package");
+    commonAppender.addComments(beforeClassSb);
+    commonAppender.addPackage(beforeClassSb, "dummy_package");
     beforeClassSb.append(Strings.LINE_SEPARATOR);
-    CommonAppender.addEclispeCollAndLombokImport(beforeClassSb);
+    commonAppender.addEclispeCollAndLombokImport(beforeClassSb);
     beforeClassSb.append(Strings.LINE_SEPARATOR);
 
     return beforeClassSb.toString();
@@ -47,8 +47,8 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
    *
    */
   protected String generateClassDeclaration(String clazz, StringBuilder classDeclarationSb) {
-    CommonAppender.addBasicLombokAnnotationOnClass(classDeclarationSb);
-    CommonAppender.addLombokConstructorAnnotationOnClass(classDeclarationSb);
+    commonAppender.addBasicLombokAnnotationOnClass(classDeclarationSb);
+    commonAppender.addLombokConstructorAnnotationOnClass(classDeclarationSb);
     return classDeclarationSb.append("public class ").append(clazz.strip()).append(" {")
         .append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR).toString();
   }
@@ -65,7 +65,9 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
     for (int i = 0; i < fields.size(); i++) {
       var field = fields.get(i);
       var annotations = Lists.immutable.withAll(field.getAnnotations());
-      fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
+      if (annotations.notEmpty()){
+        fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
+      }
       fieldSb.append("  ").append(field.getModifier()).append(" ").append(field.getType()).append(" ").append(field.getName())
           .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
     }

@@ -34,10 +34,10 @@ public class GenericClassGenerator extends AbstractClassGenerator{
    *
    */
   protected String generateBeforeClass(StringBuilder beforeClassSb) {
-    CommonAppender.addComments(beforeClassSb);
-    CommonAppender.addPackage(beforeClassSb, "dummy_package");
+    commonAppender.addComments(beforeClassSb);
+    commonAppender.addPackage(beforeClassSb, "dummy_package");
     beforeClassSb.append(Strings.LINE_SEPARATOR);
-    CommonAppender.addEclispeCollAndLombokImport(beforeClassSb);
+    commonAppender.addEclispeCollAndLombokImport(beforeClassSb);
     beforeClassSb.append(Strings.LINE_SEPARATOR);
 
     return beforeClassSb.toString();
@@ -50,7 +50,7 @@ public class GenericClassGenerator extends AbstractClassGenerator{
    *
    */
   protected String generateClassDeclaration(String clazz, StringBuilder classDeclarationSb) {
-    CommonAppender.addBasicLombokAnnotationOnClass(classDeclarationSb);
+    commonAppender.addBasicLombokAnnotationOnClass(classDeclarationSb);
     classDeclarationSb.append("@Builder\n")
     ;//make sure the constructor is generated
     return classDeclarationSb
@@ -69,7 +69,9 @@ public class GenericClassGenerator extends AbstractClassGenerator{
       var field = fields.get(i);
       var fixedType = getFixedType(genericClass, field.getType());
       var annotations = Lists.immutable.withAll(field.getAnnotations());
-      fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
+      if (annotations.notEmpty()){
+        fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
+      }
       fieldSb.append("  ").append(field.getModifier()).append(" ").append(fixedType).append(" ").append(field.getName())
           .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
     }

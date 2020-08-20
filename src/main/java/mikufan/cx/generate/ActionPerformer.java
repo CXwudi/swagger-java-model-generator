@@ -1,17 +1,17 @@
 package mikufan.cx.generate;
-import mikufan.cx.generate.appender.FieldAppender;
 import mikufan.cx.generate.store_info.ClassInfo;
 
 import static mikufan.cx.generate.Action.NEW_CLASS;
 import static mikufan.cx.generate.Action.NEW_GENERIC_CLASS;
 
 /**
- * stateful careful
+ * stateful careful <br/>
+ * use it by feeding line by line, and then in the last line which is a '}', the class definition is out
  */
 public class ActionPerformer {
 
-  private static ClassInfo.ClassInfoBuilder classBuilder;
-  private static Action whatClazz;
+  private ClassInfo.ClassInfoBuilder classBuilder;
+  private Action whatClazz;
 
   /**
    * performance one of the action to the line
@@ -21,7 +21,7 @@ public class ActionPerformer {
    * or the complete class definition if the action is END_CLASS
    *
    */
-  public static String performAction(Action action, String line){
+  public String performAction(Action action, String line){
 
     switch (action){
       case NEW_GENERIC_CLASS:
@@ -38,7 +38,7 @@ public class ActionPerformer {
         return endRecordAndStartWritingThisClass(line, classBuilder);
 
       case FIELD:
-        FieldAppender.putField(line, classBuilder, whatClazz);
+        new FieldReader().readFieldAndStore(line, classBuilder, whatClazz);
         return "";
       default:
         return "";
@@ -47,7 +47,7 @@ public class ActionPerformer {
   }
 
 
-  protected static String putGenericTypeClassHeader(String line, ClassInfo.ClassInfoBuilder builder) {
+  protected String putGenericTypeClassHeader(String line, ClassInfo.ClassInfoBuilder builder) {
 
     line = line.trim().replace("] {", "");
     var classes = line.split("\\[");
@@ -58,13 +58,13 @@ public class ActionPerformer {
     return thisClass;
   }
 
-  protected static String putConcreteClassHeader(String line, ClassInfo.ClassInfoBuilder builder) {
+  protected String putConcreteClassHeader(String line, ClassInfo.ClassInfoBuilder builder) {
     var className = line.substring(0, line.indexOf("{")).trim();
     builder.clazz(className);
     return className;
   }
 
-  protected static String endRecordAndStartWritingThisClass(String line, ClassInfo.ClassInfoBuilder builder) {
+  protected String endRecordAndStartWritingThisClass(String line, ClassInfo.ClassInfoBuilder builder) {
     return builder.build().toClassDefinition();
   }
 }
