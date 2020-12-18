@@ -1,7 +1,6 @@
 package mikufan.cx.generate;
 
 import lombok.SneakyThrows;
-import mikufan.cx.generate.Action;
 import mikufan.cx.generate.store_info.ClassInfo;
 import mikufan.cx.generate.store_info.FieldInfo;
 
@@ -30,7 +29,8 @@ public class FieldReader {
         .type(getJavaType(typeName))
         .name(fieldName)
         //.annotation("@JsonProperty")
-        .modifier(whatClazz == Action.NEW_GENERIC_CLASS ? "protected" : "private")
+        // for concrete class, use field default lombok annotation
+        .modifier(whatClazz == Action.NEW_GENERIC_CLASS ? "protected" : "")
         .build());
 
     return builder.toString();

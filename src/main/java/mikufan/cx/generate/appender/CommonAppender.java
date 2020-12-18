@@ -15,16 +15,18 @@ public class CommonAppender {
   public void addImport(StringBuilder classStringBuilder) {
     classStringBuilder.append(
         "import lombok.*;\n" +
-            "import lombok.extern.jackson.Jacksonized;\n" +
+            "import lombok.experimental.FieldDefaults;\n" +
+            "import lombok.extern.jackson.Jacksonized;\n\n" +
             "import java.util.List;\n");
   }
 
   public void addBasicLombokAnnotationOnClass(StringBuilder classStringBuilder) {
     classStringBuilder.append("@Getter @ToString\n");
+    classStringBuilder.append("@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)\n");
   }
 
   public void addConstructorLombokAnnotationOnClass(StringBuilder classStringBuilder) {
-    classStringBuilder.append("@Builder @Jacksonized\n");
+    classStringBuilder.append("@Builder(toBuilder = true) @Jacksonized\n");
   }
 
   public void addComments(StringBuilder classStringBuilder) {
