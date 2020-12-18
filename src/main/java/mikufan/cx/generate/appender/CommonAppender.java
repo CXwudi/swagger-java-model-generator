@@ -20,13 +20,31 @@ public class CommonAppender {
             "import java.util.List;\n");
   }
 
+  public void addImportForGeneric(StringBuilder classStringBuilder) {
+    classStringBuilder.append(
+        "import lombok.*;\n" +
+            "import lombok.experimental.*;\n" +
+            "import lombok.extern.jackson.Jacksonized;\n\n" +
+            "import java.util.List;\n");
+  }
+
   public void addBasicLombokAnnotationOnClass(StringBuilder classStringBuilder) {
+    classStringBuilder.append("@Getter @ToString\n");
+    classStringBuilder.append("@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)\n");
+  }
+
+  public void addBasicLombokAnnotationOnGenericClass(StringBuilder classStringBuilder) {
+    // keep it separate from concrete class generation
     classStringBuilder.append("@Getter @ToString\n");
     classStringBuilder.append("@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)\n");
   }
 
   public void addConstructorLombokAnnotationOnClass(StringBuilder classStringBuilder) {
     classStringBuilder.append("@Builder(toBuilder = true) @Jacksonized\n");
+  }
+
+  public void addConstructorLombokAnnotationOnGenericClass(StringBuilder classStringBuilder) {
+    classStringBuilder.append("@SuperBuilder(toBuilder = true) @Jacksonized\n");
   }
 
   public void addComments(StringBuilder classStringBuilder) {

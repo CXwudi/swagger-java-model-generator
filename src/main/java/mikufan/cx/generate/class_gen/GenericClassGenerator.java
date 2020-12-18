@@ -6,6 +6,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.eclipse.collections.api.factory.Lists;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GenericClassGenerator extends AbstractClassGenerator{
   private static final String GENERIC_DECLARED_TYPE = "T";
@@ -36,7 +37,7 @@ public class GenericClassGenerator extends AbstractClassGenerator{
     commonAppender.addComments(beforeClassSb);
     commonAppender.addPackage(beforeClassSb, "dummy_package");
     beforeClassSb.append(Strings.LINE_SEPARATOR);
-    commonAppender.addImport(beforeClassSb);
+    commonAppender.addImportForGeneric(beforeClassSb);
     beforeClassSb.append(Strings.LINE_SEPARATOR);
 
     return beforeClassSb.toString();
@@ -49,8 +50,8 @@ public class GenericClassGenerator extends AbstractClassGenerator{
    *
    */
   protected String generateClassDeclaration(String clazz, StringBuilder classDeclarationSb) {
-    commonAppender.addBasicLombokAnnotationOnClass(classDeclarationSb);
-    commonAppender.addConstructorLombokAnnotationOnClass(classDeclarationSb);
+    commonAppender.addBasicLombokAnnotationOnGenericClass(classDeclarationSb);
+    commonAppender.addConstructorLombokAnnotationOnGenericClass(classDeclarationSb);
     return classDeclarationSb
         .append("public class ").append(clazz.strip()).append("<").append(GENERIC_DECLARED_TYPE).append(">").append(" {")
         .append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR).toString();
@@ -70,7 +71,7 @@ public class GenericClassGenerator extends AbstractClassGenerator{
       if (annotations.notEmpty()){
         fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
       }
-      fieldSb.append("  ").append(field.getModifier()).append(" ").append(fixedType).append(" ").append(field.getName())
+      fieldSb.append("  ").append(Objects.toString(field.getModifier(), "")).append(" ").append(fixedType).append(" ").append(field.getName())
           .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
     }
 

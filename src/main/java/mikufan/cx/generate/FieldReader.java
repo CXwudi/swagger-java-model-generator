@@ -30,7 +30,7 @@ public class FieldReader {
         .name(fieldName)
         //.annotation("@JsonProperty")
         // for concrete class, use field default lombok annotation
-        .modifier(whatClazz == Action.NEW_GENERIC_CLASS ? "protected" : "")
+        //.modifier(whatClazz == Action.NEW_GENERIC_CLASS ? "protected" : "private")
         .build());
 
     return builder.toString();

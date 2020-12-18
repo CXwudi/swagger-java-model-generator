@@ -6,6 +6,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.eclipse.collections.api.factory.Lists;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ConcreteClassGenerator extends AbstractClassGenerator{
 
@@ -67,7 +68,7 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
       if (annotations.notEmpty()){
         fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
       }
-      fieldSb.append("  ").append(field.getModifier()).append(" ").append(field.getType()).append(" ").append(field.getName())
+      fieldSb.append("  ").append(Objects.toString(field.getModifier(), "")).append(" ").append(field.getType()).append(" ").append(field.getName())
           .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
     }
 
