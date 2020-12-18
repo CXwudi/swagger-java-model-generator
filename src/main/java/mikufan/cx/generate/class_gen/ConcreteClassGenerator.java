@@ -1,7 +1,6 @@
 package mikufan.cx.generate.class_gen;
 
 import lombok.SneakyThrows;
-import mikufan.cx.generate.appender.CommonAppender;
 import mikufan.cx.generate.store_info.FieldInfo;
 import org.apache.logging.log4j.util.Strings;
 import org.eclipse.collections.api.factory.Lists;
@@ -24,10 +23,10 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
   }
 
   /**
-   * //auto-generated ...
-   * package ...
+   * //auto-generated ... <br/>
+   * package ... <br/>
    *
-   * import ...
+   * import ... <br/>
    * ...
    *
    */
@@ -35,21 +34,21 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
     commonAppender.addComments(beforeClassSb);
     commonAppender.addPackage(beforeClassSb, "dummy_package");
     beforeClassSb.append(Strings.LINE_SEPARATOR);
-    commonAppender.addEclispeCollAndLombokImport(beforeClassSb);
+    commonAppender.addImport(beforeClassSb);
     beforeClassSb.append(Strings.LINE_SEPARATOR);
 
     return beforeClassSb.toString();
   }
   /**
-   * \@Annotation
-   * public class Clazz {
+   * \@Annotation <br/>
+   * public final class Clazz {
    *
    *
    */
   protected String generateClassDeclaration(String clazz, StringBuilder classDeclarationSb) {
     commonAppender.addBasicLombokAnnotationOnClass(classDeclarationSb);
-    commonAppender.addLombokConstructorAnnotationOnClass(classDeclarationSb);
-    return classDeclarationSb.append("public class ").append(clazz.strip()).append(" {")
+    commonAppender.addConstructorLombokAnnotationOnClass(classDeclarationSb);
+    return classDeclarationSb.append("public final class ").append(clazz.strip()).append(" {")
         .append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR).toString();
   }
 

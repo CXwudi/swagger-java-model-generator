@@ -29,7 +29,7 @@ public class FieldReader {
     builder.field(FieldInfo.builder()
         .type(getJavaType(typeName))
         .name(fieldName)
-        .annotation("@JsonProperty")
+        //.annotation("@JsonProperty")
         .modifier(whatClazz == Action.NEW_GENERIC_CLASS ? "protected" : "private")
         .build());
 
@@ -47,7 +47,7 @@ public class FieldReader {
     } else if (typeName.equalsIgnoreCase("boolean")){
       realType = "boolean";
     } else if (typeName.contains("Array")){
-      realType = "MutableList<" + typeName.substring(typeName.indexOf("[")+1, typeName.indexOf("]")) + ">";
+      realType = "List<" + typeName.substring(typeName.indexOf("[")+1, typeName.indexOf("]")) + ">";
     } else {
       realType = typeName;
     }

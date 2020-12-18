@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.extern.jackson.Jacksonized;
 
 @ToString
-@Getter @Builder @Jacksonized
+@Getter @Builder(toBuilder = true) @Jacksonized
 public class InnerEntity {
   private String name;
   private int id;

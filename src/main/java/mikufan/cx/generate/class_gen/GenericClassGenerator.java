@@ -1,7 +1,6 @@
 package mikufan.cx.generate.class_gen;
 
 import lombok.SneakyThrows;
-import mikufan.cx.generate.appender.CommonAppender;
 import mikufan.cx.generate.store_info.FieldInfo;
 import org.apache.logging.log4j.util.Strings;
 import org.eclipse.collections.api.factory.Lists;
@@ -20,16 +19,16 @@ public class GenericClassGenerator extends AbstractClassGenerator{
     generateBeforeClass(beforeClassSb);
     generateClassDeclaration(clazz, classDeclarationSb);
     generateFields(fields, genericClazz, fieldSb);
-    generateAllArgConstructor(fields, clazz, genericClazz, constructorSb);
+    //generateAllArgConstructor(fields, clazz, genericClazz, constructorSb);
     return finalGeneration(beforeClassSb, classDeclarationSb, fieldSb, constructorSb);
 
   }
 
   /**
-   * //auto-generated ...
-   * package ...
+   * //auto-generated ... <br/>
+   * package ... <br/>
    *
-   * import ...
+   * import ... <br/>
    * ...
    *
    */
@@ -37,22 +36,21 @@ public class GenericClassGenerator extends AbstractClassGenerator{
     commonAppender.addComments(beforeClassSb);
     commonAppender.addPackage(beforeClassSb, "dummy_package");
     beforeClassSb.append(Strings.LINE_SEPARATOR);
-    commonAppender.addEclispeCollAndLombokImport(beforeClassSb);
+    commonAppender.addImport(beforeClassSb);
     beforeClassSb.append(Strings.LINE_SEPARATOR);
 
     return beforeClassSb.toString();
   }
 
   /**
-   * \@Annotation
+   * \@Annotation... <br/>
    * public class Clazz<T> {
    *
    *
    */
   protected String generateClassDeclaration(String clazz, StringBuilder classDeclarationSb) {
     commonAppender.addBasicLombokAnnotationOnClass(classDeclarationSb);
-    classDeclarationSb.append("@Builder\n")
-    ;//make sure the constructor is generated
+    commonAppender.addConstructorLombokAnnotationOnClass(classDeclarationSb);
     return classDeclarationSb
         .append("public class ").append(clazz.strip()).append("<").append(GENERIC_DECLARED_TYPE).append(">").append(" {")
         .append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR).toString();

@@ -5,9 +5,12 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.jackson.Jacksonized;
 
+import java.util.List;
+
 @ToString @Getter
-@Builder @Jacksonized
+@Builder(toBuilder = true) @Jacksonized
 public class SomeHolder<T> {
 
   private T result;
+  private List<T> contents;
 }

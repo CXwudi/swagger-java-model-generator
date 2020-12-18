@@ -1,17 +1,17 @@
-PartialFindResult[SongInListForApiContract] {
-items (Array[SongInListForApiContract], optional),
+PartialFindResult[SongInList] {
+items (Array[SongInList], optional),
 term (string, optional),
 totalCount (integer, optional)
 }
-SongInListForApiContract {
+SongInList {
 notes (string, optional),
 order (integer, optional),
-song (SongForApiContract, optional)
+song (Song, optional)
 }
-SongForApiContract {
+Song {
 additionalNames (string, optional),
-albums (Array[AlbumContract], optional),
-artists (Array[ArtistForSongContract], optional),
+albums (Array[Album], optional),
+artists (Array[ArtistForSong], optional),
 artistString (string, optional),
 createDate (string, optional),
 defaultName (string, optional),
@@ -20,25 +20,25 @@ deleted (boolean, optional),
 favoritedTimes (integer, optional),
 id (integer, optional),
 lengthSeconds (integer, optional),
-lyrics (Array[LyricsForSongContract], optional),
-mainPicture (EntryThumbForApiContract, optional),
+lyrics (Array[LyricsForSong], optional),
+mainPicture (EntryThumb, optional),
 mergedTo (integer, optional),
 name (string, optional),
-names (Array[LocalizedStringContract], optional),
+names (Array[LocalizedString], optional),
 originalVersionId (integer, optional),
 publishDate (string, optional),
-pvs (Array[PVContract], optional),
+pvs (Array[PV], optional),
 pvServices (string, optional) = ['Nothing', 'NicoNicoDouga', 'Youtube', 'SoundCloud', 'Vimeo', 'Piapro', 'Bilibili', 'File', 'LocalFile', 'Creofuga', 'Bandcamp'],
 ratingScore (integer, optional),
-releaseEvent (ReleaseEventForApiContract, optional),
+releaseEvent (ReleaseEvent, optional),
 songType (string, optional) = ['Unspecified', 'Original', 'Remaster', 'Remix', 'Cover', 'Arrangement', 'Instrumental', 'Mashup', 'MusicPV', 'DramaPV', 'Live', 'Illustration', 'Other'],
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
-tags (Array[TagUsageForApiContract], optional),
+tags (Array[TagUsage], optional),
 thumbUrl (string, optional),
 version (integer, optional),
-webLinks (Array[WebLinkForApiContract], optional)
+webLinks (Array[WebLink], optional)
 }
-AlbumContract {
+Album {
 additionalNames (string, optional),
 artistString (string, optional),
 coverPictureMime (string, optional),
@@ -49,13 +49,13 @@ id (integer, optional),
 name (string, optional),
 ratingAverage (number, optional),
 ratingCount (integer, optional),
-releaseDate (OptionalDateTimeContract, optional),
-releaseEvent (ReleaseEventForApiContract, optional),
+releaseDate (OptionalDateTime, optional),
+releaseEvent (ReleaseEvent, optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
 version (integer, optional)
 }
-ArtistForSongContract {
-artist (ArtistContract, optional),
+ArtistForSong {
+artist (Artist, optional),
 categories (string, optional) = ['Nothing', 'Vocalist', 'Producer', 'Animator', 'Label', 'Circle', 'Other', 'Band', 'Illustrator', 'Subject'],
 effectiveRoles (string, optional) = ['Default', 'Animator', 'Arranger', 'Composer', 'Distributor', 'Illustrator', 'Instrumentalist', 'Lyricist', 'Mastering', 'Publisher', 'Vocalist', 'VoiceManipulator', 'Other', 'Mixer', 'Chorus', 'Encoder', 'VocalDataProvider'],
 id (integer, optional),
@@ -64,7 +64,7 @@ isSupport (boolean, optional),
 name (string, optional),
 roles (string, optional) = ['Default', 'Animator', 'Arranger', 'Composer', 'Distributor', 'Illustrator', 'Instrumentalist', 'Lyricist', 'Mastering', 'Publisher', 'Vocalist', 'VoiceManipulator', 'Other', 'Mixer', 'Chorus', 'Encoder', 'VocalDataProvider']
 }
-LyricsForSongContract {
+LyricsForSong {
 cultureCode (string, optional),
 id (integer, optional),
 source (string, optional),
@@ -72,18 +72,18 @@ translationType (string, optional) = ['Original', 'Romanized', 'Translation'],
 url (string, optional),
 value (string, optional)
 }
-EntryThumbForApiContract {
+EntryThumb {
 mime (string, optional),
 urlOriginal (string, optional),
 urlSmallThumb (string, optional),
 urlThumb (string, optional),
 urlTinyThumb (string, optional)
 }
-LocalizedStringContract {
+LocalizedString {
 language (string, optional) = ['Unspecified', 'Japanese', 'Romaji', 'English'],
 value (string, optional)
 }
-PVContract {
+PV {
 author (string, optional),
 createdBy (integer, optional),
 disabled (boolean, optional),
@@ -98,49 +98,50 @@ pvType (string, optional) = ['Original', 'Reprint', 'Other'],
 thumbUrl (string, optional),
 url (string, optional)
 }
-ReleaseEventForApiContract {
+ReleaseEvent {
 additionalNames (string, optional),
-artists (Array[ArtistForEventContract], optional),
+artists (Array[ArtistForEvent], optional),
 category (string, optional) = ['Unspecified', 'AlbumRelease', 'Anniversary', 'Club', 'Concert', 'Contest', 'Convention', 'Other'],
 date (string, optional),
 description (string, optional),
 endDate (string, optional),
 id (integer, optional),
-mainPicture (EntryThumbForApiContract, optional),
+mainPicture (EntryThumb, optional),
 name (string, optional),
-names (Array[LocalizedStringContract], optional),
-series (ReleaseEventSeriesContract, optional),
+names (Array[LocalizedString], optional),
+series (ReleaseEventSeries, optional),
 seriesId (integer, optional),
 seriesNumber (integer, optional),
 seriesSuffix (string, optional),
-songList (SongListBaseContract, optional),
+songList (SongListBase, optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
-tags (Array[TagUsageForApiContract], optional),
+tags (Array[TagUsage], optional),
 urlSlug (string, optional),
-venue (VenueForApiContract, optional),
+venue (Venue, optional),
 venueName (string, optional),
 version (integer, optional),
-webLinks (Array[WebLinkForApiContract], optional)
+webLinks (Array[WebLink], optional)
 }
-TagUsageForApiContract {
+TagUsage {
 count (integer, optional),
-tag (TagBaseContract, optional)
+tag (TagBase, optional)
 }
-WebLinkForApiContract {
+WebLink {
 category (string, optional) = ['Official', 'Commercial', 'Reference', 'Other'],
 description (string, optional),
 descriptionOrUrl (string, optional),
+disabled (boolean, optional),
 id (integer, optional),
 url (string, optional)
 }
-OptionalDateTimeContract {
+OptionalDateTime {
 day (integer, optional),
 formatted (string, optional),
 isEmpty (boolean, optional),
 month (integer, optional),
 year (integer, optional)
 }
-ArtistContract {
+Artist {
 additionalNames (string, optional),
 artistType (string, optional) = ['Unknown', 'Circle', 'Label', 'Producer', 'Animator', 'Illustrator', 'Lyricist', 'Vocaloid', 'UTAU', 'CeVIO', 'OtherVoiceSynthesizer', 'OtherVocalist', 'OtherGroup', 'OtherIndividual', 'Utaite', 'Band', 'Vocalist', 'Character'],
 deleted (boolean, optional),
@@ -154,14 +155,14 @@ version (integer, optional)
 PVExtendedMetadata {
 json (string, optional)
 }
-ArtistForEventContract {
-artist (ArtistContract, optional),
+ArtistForEvent {
+artist (Artist, optional),
 effectiveRoles (string, optional) = ['Default', 'Dancer', 'DJ', 'Instrumentalist', 'Organizer', 'Promoter', 'VJ', 'Vocalist', 'VoiceManipulator', 'OtherPerformer', 'Other'],
 id (integer, optional),
 name (string, optional),
 roles (string, optional) = ['Default', 'Dancer', 'DJ', 'Instrumentalist', 'Organizer', 'Promoter', 'VJ', 'Vocalist', 'VoiceManipulator', 'OtherPerformer', 'Other']
 }
-ReleaseEventSeriesContract {
+ReleaseEventSeries {
 additionalNames (string, optional),
 category (string, optional) = ['Unspecified', 'AlbumRelease', 'Anniversary', 'Club', 'Concert', 'Contest', 'Convention', 'Other'],
 deleted (boolean, optional),
@@ -172,48 +173,49 @@ pictureMime (string, optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
 urlSlug (string, optional),
 version (integer, optional),
-webLinks (Array[WebLinkContract], optional)
+webLinks (Array[WebLink], optional)
 }
-SongListBaseContract {
+SongListBase {
 featuredCategory (string, optional) = ['Nothing', 'Concerts', 'VocaloidRanking', 'Pools', 'Other'],
 id (integer, optional),
 name (string, optional)
 }
-VenueForApiContract {
+Venue {
 additionalNames (string, optional),
 address (string, optional),
 addressCountryCode (string, optional),
-coordinates (OptionalGeoPointContract, optional),
+coordinates (OptionalGeoPoint, optional),
 description (string, optional),
-events (Array[ReleaseEventContract], optional),
+events (Array[ReleaseEvent], optional),
 id (integer, optional),
 name (string, optional),
-names (Array[LocalizedStringContract], optional),
+names (Array[LocalizedString], optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
 version (integer, optional),
-webLinks (Array[WebLinkForApiContract], optional)
+webLinks (Array[WebLink], optional)
 }
-TagBaseContract {
+TagBase {
 additionalNames (string, optional),
 categoryName (string, optional),
 id (integer, optional),
 name (string, optional),
 urlSlug (string, optional)
 }
-WebLinkContract {
+WebLink {
 category (string, optional) = ['Official', 'Commercial', 'Reference', 'Other'],
 description (string, optional),
 descriptionOrUrl (string, optional),
+disabled (boolean, optional),
 id (integer, optional),
 url (string, optional)
 }
-OptionalGeoPointContract {
+OptionalGeoPoint {
 formatted (string, optional),
 hasValue (boolean, optional),
 latitude (number, optional),
 longitude (number, optional)
 }
-ReleaseEventContract {
+ReleaseEvent {
 additionalNames (string, optional),
 category (string, optional) = ['Unspecified', 'AlbumRelease', 'Anniversary', 'Club', 'Concert', 'Contest', 'Convention', 'Other'],
 customName (boolean, optional),
@@ -226,24 +228,24 @@ id (integer, optional),
 inheritedCategory (string, optional) = ['Unspecified', 'AlbumRelease', 'Anniversary', 'Club', 'Concert', 'Contest', 'Convention', 'Other'],
 name (string, optional),
 pictureMime (string, optional),
-series (ReleaseEventSeriesContract, optional),
-songList (SongListBaseContract, optional),
+series (ReleaseEventSeries, optional),
+songList (SongListBase, optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
 urlSlug (string, optional),
-venue (VenueContract, optional),
+venue (Venue, optional),
 venueName (string, optional),
 version (integer, optional)
 }
-VenueContract {
+Venue {
 additionalNames (string, optional),
 address (string, optional),
 addressCountryCode (string, optional),
-coordinates (OptionalGeoPointContract, optional),
+coordinates (OptionalGeoPoint, optional),
 deleted (boolean, optional),
 description (string, optional),
 id (integer, optional),
 name (string, optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
 version (integer, optional),
-webLinks (Array[WebLinkContract], optional)
+webLinks (Array[WebLink], optional)
 }
