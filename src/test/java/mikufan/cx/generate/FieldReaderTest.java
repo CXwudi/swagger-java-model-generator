@@ -2,6 +2,7 @@ package mikufan.cx.generate;
 
 import lombok.extern.slf4j.Slf4j;
 import mikufan.cx.generate.store_info.ClassInfo;
+import org.eclipse.collections.api.factory.Lists;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
