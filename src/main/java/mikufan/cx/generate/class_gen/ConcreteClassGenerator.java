@@ -54,8 +54,8 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
   }
 
   /**
-   *   \@JsonProperty
-   *   private Type field\;
+   *   \@tags
+   *   modifier Type field\;
    *
    *
    */
@@ -69,7 +69,7 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
         fieldSb.append("  ").append(annotations.makeString(" ")).append(Strings.LINE_SEPARATOR);
       }
       fieldSb.append("  ").append(Objects.toString(field.getModifier(), "")).append(" ").append(field.getType()).append(" ").append(field.getName())
-          .append(';').append(Strings.LINE_SEPARATOR).append(Strings.LINE_SEPARATOR);
+          .append(';').append(Strings.LINE_SEPARATOR);
     }
 
     return fieldSb.toString();
@@ -87,7 +87,7 @@ public class ConcreteClassGenerator extends AbstractClassGenerator{
     for (int i = 1; i < stringBuilders.length; i++) {
       destSb.append(stringBuilders[i].toString());
     }
-    destSb.append("}").append(Strings.LINE_SEPARATOR);
+    destSb.append(Strings.LINE_SEPARATOR).append("}").append(Strings.LINE_SEPARATOR);
     return destSb.toString();
   }
 }
