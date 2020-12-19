@@ -6,6 +6,9 @@ import org.apache.logging.log4j.util.Strings;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
+
 import static mikufan.cx.generate.Action.*;
 
 @Slf4j
@@ -16,6 +19,7 @@ public class Main {
     var modelFile = Path.of(args[0]);
     var modelString = Files.readString(modelFile);
     var eachLine = modelString.split("\n");
+    Set<String> existingClasses = new HashSet<>();
 
     String currentClassName = "";
     ActionPerformer actionPerformer = new ActionPerformer();
@@ -24,10 +28,13 @@ public class Main {
         continue;
       }
       var indication = ActionDecider.whatNext(line);
-      log.info("indication = {}, line = {}", indication, line);
       var returnString = actionPerformer.performAction(indication, line);
+      log.info("indication = {}, line = {}", indication, line);
       if (indication == NEW_CLASS || indication == NEW_GENERIC_CLASS){
         currentClassName = returnString;
+        if (existingClasses.contains(currentClassName)){
+          throw new RuntimeException(currentClassName + " already exist, correct your model txt input file");
+        }
       }
       if (indication == END_CLASS && returnString.length() > 0){
         var dir = Path.of("output");
@@ -37,6 +44,7 @@ public class Main {
         }
         outputFile.toFile().createNewFile();
         Files.writeString(outputFile, returnString);
+        existingClasses.add(currentClassName);
         actionPerformer = new ActionPerformer();
       }
     }

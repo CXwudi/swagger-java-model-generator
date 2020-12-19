@@ -1,14 +1,14 @@
-PartialFindResult[SongInList] {
-items (Array[SongInList], optional),
+PartialFindResult[SongInListForApi] {
+items (Array[SongInListForApi], optional),
 term (string, optional),
 totalCount (integer, optional)
 }
-SongInList {
+SongInListForApi {
 notes (string, optional),
 order (integer, optional),
-song (Song, optional)
+song (SongForApi, optional)
 }
-Song {
+SongForApi {
 additionalNames (string, optional),
 albums (Array[Album], optional),
 artists (Array[ArtistForSong], optional),
@@ -21,7 +21,7 @@ favoritedTimes (integer, optional),
 id (integer, optional),
 lengthSeconds (integer, optional),
 lyrics (Array[LyricsForSong], optional),
-mainPicture (EntryThumb, optional),
+mainPicture (EntryThumbForApi, optional),
 mergedTo (integer, optional),
 name (string, optional),
 names (Array[LocalizedString], optional),
@@ -30,13 +30,13 @@ publishDate (string, optional),
 pvs (Array[PV], optional),
 pvServices (string, optional) = ['Nothing', 'NicoNicoDouga', 'Youtube', 'SoundCloud', 'Vimeo', 'Piapro', 'Bilibili', 'File', 'LocalFile', 'Creofuga', 'Bandcamp'],
 ratingScore (integer, optional),
-releaseEvent (ReleaseEvent, optional),
+releaseEvent (ReleaseEventForApi, optional),
 songType (string, optional) = ['Unspecified', 'Original', 'Remaster', 'Remix', 'Cover', 'Arrangement', 'Instrumental', 'Mashup', 'MusicPV', 'DramaPV', 'Live', 'Illustration', 'Other'],
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
-tags (Array[TagUsage], optional),
+tags (Array[TagUsageForApi], optional),
 thumbUrl (string, optional),
 version (integer, optional),
-webLinks (Array[WebLink], optional)
+webLinks (Array[WebLinkForApi], optional)
 }
 Album {
 additionalNames (string, optional),
@@ -50,7 +50,7 @@ name (string, optional),
 ratingAverage (number, optional),
 ratingCount (integer, optional),
 releaseDate (OptionalDateTime, optional),
-releaseEvent (ReleaseEvent, optional),
+releaseEvent (ReleaseEventForApi, optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
 version (integer, optional)
 }
@@ -72,7 +72,7 @@ translationType (string, optional) = ['Original', 'Romanized', 'Translation'],
 url (string, optional),
 value (string, optional)
 }
-EntryThumb {
+EntryThumbForApi {
 mime (string, optional),
 urlOriginal (string, optional),
 urlSmallThumb (string, optional),
@@ -98,7 +98,7 @@ pvType (string, optional) = ['Original', 'Reprint', 'Other'],
 thumbUrl (string, optional),
 url (string, optional)
 }
-ReleaseEvent {
+ReleaseEventForApi {
 additionalNames (string, optional),
 artists (Array[ArtistForEvent], optional),
 category (string, optional) = ['Unspecified', 'AlbumRelease', 'Anniversary', 'Club', 'Concert', 'Contest', 'Convention', 'Other'],
@@ -106,7 +106,7 @@ date (string, optional),
 description (string, optional),
 endDate (string, optional),
 id (integer, optional),
-mainPicture (EntryThumb, optional),
+mainPicture (EntryThumbForApi, optional),
 name (string, optional),
 names (Array[LocalizedString], optional),
 series (ReleaseEventSeries, optional),
@@ -115,18 +115,18 @@ seriesNumber (integer, optional),
 seriesSuffix (string, optional),
 songList (SongListBase, optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
-tags (Array[TagUsage], optional),
+tags (Array[TagUsageForApi], optional),
 urlSlug (string, optional),
-venue (Venue, optional),
+venue (VenueForApi, optional),
 venueName (string, optional),
 version (integer, optional),
-webLinks (Array[WebLink], optional)
+webLinks (Array[WebLinkForApi], optional)
 }
-TagUsage {
+TagUsageForApi {
 count (integer, optional),
 tag (TagBase, optional)
 }
-WebLink {
+WebLinkForApi {
 category (string, optional) = ['Official', 'Commercial', 'Reference', 'Other'],
 description (string, optional),
 descriptionOrUrl (string, optional),
@@ -180,7 +180,7 @@ featuredCategory (string, optional) = ['Nothing', 'Concerts', 'VocaloidRanking',
 id (integer, optional),
 name (string, optional)
 }
-Venue {
+VenueForApi {
 additionalNames (string, optional),
 address (string, optional),
 addressCountryCode (string, optional),
@@ -192,7 +192,7 @@ name (string, optional),
 names (Array[LocalizedString], optional),
 status (string, optional) = ['Draft', 'Finished', 'Approved', 'Locked'],
 version (integer, optional),
-webLinks (Array[WebLink], optional)
+webLinks (Array[WebLinkForApi], optional)
 }
 TagBase {
 additionalNames (string, optional),
