@@ -5,6 +5,13 @@ A stupid small project that can generate Java classes representing VocaDB Models
 Example input models: [models.txt](models.txt)  
 Example outputs: [output/](output/)
 
+## About this project
+
+VocaDB has switched their API page to swagger [here](https://vocadb.net/swagger/index.html). 
+If you need new VocaDB Java models, use [openapi-generator](https://github.com/OpenAPITools/openapi-generator).
+They also has an openapi json file on their swagger site.  
+Models from this repo are old but may still works. Use at your own risk
+
 ## How to use
 
 1. make sure you have Java 11 installed
